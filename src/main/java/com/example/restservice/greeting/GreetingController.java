@@ -1,4 +1,4 @@
-package com.develop.webservice.restservice.greeting;
+package com.example.restservice.greeting;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -14,6 +14,12 @@ public class GreetingController {
 
 	@GetMapping("/greeting")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	}
+	
+	@GetMapping("/greeting-javaconfig")
+	public Greeting greetingWithJavaconfig(@RequestParam(required = false, defaultValue = "World") String name) {
+		System.out.println("==== in greeting ====");
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
 }
