@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.develop.webservice.restservice.greeting;
 
 import lombok.Data;
 
