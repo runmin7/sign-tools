@@ -28,6 +28,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
+import com.example.restservice.greeting.GreetingController;
+
 import static org.assertj.core.api.BDDAssertions.then;
 
 /**
@@ -35,6 +37,7 @@ import static org.assertj.core.api.BDDAssertions.then;
  *
  * @author Dave Syer
  */
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = GreetingController.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {"management.port=0"})
 public class HelloWorldApplicationTests {
@@ -53,7 +56,12 @@ public class HelloWorldApplicationTests {
     @SuppressWarnings("rawtypes")
     ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(
         "http://localhost:" + this.port + "/hello-world", Map.class);
-
+    
+    System.out.println("http://localhost:" + this.port + "/hello-world");
+    System.out.println(this.port);
+    System.out.println(entity.getBody());
+    System.out.println(entity.getHeaders());
+    
     then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 
@@ -63,6 +71,10 @@ public class HelloWorldApplicationTests {
     ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(
         "http://localhost:" + this.mgt + "/actuator/info", Map.class);
 
+    System.out.println(this.port);
+    System.out.println(entity.getBody());
+    System.out.println(entity.getHeaders());
+    
     then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 
